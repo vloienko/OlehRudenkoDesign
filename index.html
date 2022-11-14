@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css?_v=20221108173136"/> -->
-    <link rel="stylesheet" href="css/style.min.css?_v=20221108173136">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css?_v=20221114211043"/>
+    <link rel="stylesheet" href="css/style.min.css?_v=20221114211043">
     <title>Головна</title>
 </head>
 
 <body>
 	<div class="wrapper">
-		<header id="header" class="header">
+		<header id="header" class="header page-header">
    <div class="container-fluid">
       <div class="header__container">
-         <a class="header__logo" href="#">
+         <a class="header__logo scroll" data-goto=".page-header" href="#">
             <img src="img/logo.svg" alt="Oleh Rudenko">
          </a>
          <div class="header__menu menu">
@@ -23,22 +23,32 @@
             </div>
             <nav class="menu__body">
                <ul class="menu__list">
-                  <li><a class="menu__link" href="#">About me</a></li>
-                  <li><a class="menu__link" href="#">Servizi</a></li>
-                  <li><a class="menu__link" href="#">Portfolio</a></li>
-                  <li><a class="menu__link" href="#">Recesioni</a></li>
-                  <li><a class="menu__link" href="#">Contatti</a></li>
+                  <li><a class="menu__link scroll" data-goto=".page-designer" href="#">About me</a></li>
+                  <li><a class="menu__link scroll" data-goto=".page-services" href="#">Servizi</a></li>
+                  <li><a class="menu__link scroll" data-goto=".page-portfolio" href="#">Portfolio</a></li>
+                  <li><a class="menu__link scroll" data-goto=".page-reviews" href="#">Recesioni</a></li>
+                  <li><a class="menu__link scroll" data-goto=".page-footer" href="#">Contatti</a></li>
                </ul>
             </nav>
          </div>
-         <div class="header__language">
-            <img src="img/language/italy.svg" alt="language images">
-         </div>
+         <div class="header__lang lang">
+				<button class="lang__current">
+               <img src="img/language/italy.png" alt="">
+            </button>
+				<div class="lang__dropdown">
+					<a href="#">
+                  <img src="img/language/ukraine.png" alt="">
+               </a>
+					<a href="#">
+                  <img src="img/language/united-kingdom.png" alt="">
+               </a>
+				</div>
+			</div>
       </div>
    </div>
 </header>
 		<main class="main">
-			<section class="designer">
+			<section class="designer page-designer">
 				<div class="container">
 					<div class="designer__body">
 						<div class="designer__content">
@@ -56,14 +66,16 @@
 							<a class="designer__btn popup-link" href="#popup">CONTATTAMI</a>
 							<!-- <button class="designer__btn">CONTATTAMI</button> -->
 						</div>
-						<div class="designer__images">
-							<img src="img/avatar.png" alt="photo">
+						<div class="designer__box">
+							<div class="designer__img">
+								<img class="designer__photo" src="img/user-photo.jpg" alt="Photo">
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<section class="services">
+			<section class="services page-services">
 				<div class="container">
 					<div class="services__body">
 						<h4 class="services__title sub-title">MIEI SERVIZI</h4>
@@ -126,16 +138,326 @@
 				</div>
 			</section>
 
-			<!-- <section class="portfolio">
+			<section class="portfolio page-portfolio">
 				<div class="container">
+					<h4 class="portfolio__title sub-title">PORTFOLIO</h4>
 					<div class="portfolio__body">
-						<h4 class="portfolio__title sub-title">PORTFOLIO</h4>
-						
+						<nav class="filter__menu">
+							<button data-f="all" class="filter__btn all">ALL</button>
+							<button data-f="web-design" class="filter__btn web-design">Web design</button>
+							<button data-f="ui-ux-design" class="filter__btn ui-ux-design">UI/UX design</button>
+							<button data-f="graphic" class="filter__btn graphic">Graphic</button>
+							<button data-f="logo" class="filter__btn logo">Logo</button>
+							<button data-f="banner" class="filter__btn banner">Banner</button>
+						</nav>
+				
+						<div class="filter__list swiper-container">
+							<div class="filter__item swiper-wrapper">
+
+								<div class="filter__box swiper-slide web-design" href="#">
+									<a class="filter__link" href="#">
+										<img src="img/portfolio/web-design.jpg" alt="images">
+										<p>Web design</p>
+									</a>
+								</div>
+								<div class="filter__box swiper-slide ui-ux-design" href="#">
+									<a class="filter__link" href="#">
+										<img src="img/portfolio/" alt="images">
+										<p>UI/UX design</p>
+									</a>
+								</div>
+								<div class="filter__box swiper-slide graphic" href="#">
+									<a class="filter__link" href="#">
+										<img src="img/portfolio/graphic-design.jpg" alt="images">
+										<p>Graphic design</p>
+									</a>
+								</div>
+								<div class="filter__box swiper-slide logo" href="#">
+									<a class="filter__link" href="#">
+										<img src="img/portfolio/logo.jpg" alt="images">
+										<p>Logo</p>
+									</a>
+								</div>
+								<div class="filter__box swiper-slide banner" href="#">
+									<a class="filter__link" href="#">
+										<img src="img/portfolio/" alt="images">
+										<p>Banner</p>
+									</a>
+								</div>
+
+							</div>
+							<div class="swiper-pagination"></div>
+						</div>
 					</div>
-				</div>		
-			</section> -->
+				</div>
+				<script>
+					const filterBox = document.querySelectorAll('.filter__box');
+
+					document.querySelector('.filter__menu').addEventListener('click', event => {
+						if (event.target.tagName !== 'BUTTON') return false;
+
+						let filterClass = event.target.dataset['f'];
+
+						filterBox.forEach(elem => {
+							elem.classList.remove('hide');
+							if (!elem.classList.contains(filterClass) && filterClass !== 'all') {
+								elem.classList.add('hide');
+							}
+						});
+							
+					});
+				</script>
+			</section>
+
+			<section class="reviews page-reviews">
+				<div class="container">
+					<h4 class="reviews__title sub-title">RECENSIONI</h4>
+					<div class="reviews__body">
+						<div class="reviews__form">
+							<form action="#" id="formReviews" method="post" class="form__body">
+								<div class="form__item">
+									<div class="file">
+										<div id="formPreview" class="file__preview"></div>
+										<div class="file__item">
+											<input id="formImage" accept=".jpg, .png, .gif" type="file" name="image"
+												class="file__item-input">
+											<div class="file__button">Aggiungi una foto</div>
+										</div>
+									</div>
+								</div>
+								<div class="form__item">
+									<input id="formName" type="text" name="name" class="form__item-input _req"
+										placeholder="Nome e Cognome">
+								</div>
+								<div class="form__item">
+									<input id="formContact" type="text" name="contact" class="form__item-input  _req"
+										placeholder="Contatto">
+								</div>
+								<div class="form__item">
+									<textarea id="formMessage" name="message" class="form__item-input  _req"
+										placeholder="Aggiungi una recensione..."></textarea>
+								</div>
+								<button type="submit" class="form__button option-button">Invia</button>
+							</form>
+						</div>
+						<div class="clients-reviews swiper-container">
+							
+							<div class="clients-reviews__block swiper-wrapper">
+
+								<div class="clients-reviews__box swiper-slide" href="#">
+									<div class="clients-reviews__content clients-reviews__content--first">
+										<img class="clients-reviews__content-img" src="img/reviews/client-1.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--second">
+										<img class="clients-reviews__content-img" src="img/reviews/client-2.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--third">
+										<img class="clients-reviews__content-img" src="img/reviews/client-3.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="clients-reviews__box swiper-slide" href="#">
+									<div class="clients-reviews__content clients-reviews__content--first">
+										<img class="clients-reviews__content-img" src="img/reviews/client-1.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--second">
+										<img class="clients-reviews__content-img" src="img/reviews/client-2.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--third">
+										<img class="clients-reviews__content-img" src="img/reviews/client-3.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="clients-reviews__box swiper-slide" href="#">
+									<div class="clients-reviews__content clients-reviews__content--first">
+										<img class="clients-reviews__content-img" src="img/reviews/client-1.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--second">
+										<img class="clients-reviews__content-img" src="img/reviews/client-2.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--third">
+										<img class="clients-reviews__content-img" src="img/reviews/client-3.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="clients-reviews__box swiper-slide" href="#">
+									<div class="clients-reviews__content clients-reviews__content--first">
+										<img class="clients-reviews__content-img" src="img/reviews/client-1.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--second">
+										<img class="clients-reviews__content-img" src="img/reviews/client-2.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--third">
+										<img class="clients-reviews__content-img" src="img/reviews/client-3.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="clients-reviews__box swiper-slide" href="#">
+									<div class="clients-reviews__content clients-reviews__content--first">
+										<img class="clients-reviews__content-img" src="img/reviews/client-1.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--second">
+										<img class="clients-reviews__content-img" src="img/reviews/client-2.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+									<div class="clients-reviews__content clients-reviews__content--third">
+										<img class="clients-reviews__content-img" src="img/reviews/client-3.jpg" alt="photo">
+										<div class="clients-reviews__content-box">
+											<div class="clients-reviews__content-box--left">
+												<span>Recensione da:</span>
+												<p>Alessandra Rossi</p>
+												<a href="https://photonastyart.com">https://photonastyart.com</a>
+											</div>
+											<div class="clients-reviews__content-box--right">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-pagination"></div>
+
+						</div>
+					</div>
+				</div>
+			</section>
 		</main>
-		<footer class="footer">
+		<footer class="footer page-footer">
    <div class="container">
       <div class="footer__container">
          <h4 class="footer__title sub-title">CONTATTI</h4>
@@ -176,28 +498,35 @@
          <div class="popup__title">
             Inserisci il tuo nome e indirizzo email e descrivi in dettaglio cosa vorresti fare. Dopo aver esaminato la tua domanda, riceverai una risposta alla tua e-mail
          </div>
-         <form class="popup__form" action="#" method="post">
-            <input class="popup__form-item" type="text" name="name" placeholder="nome">
-            <input class="popup__form-item" type="email" name="email" placeholder="email">
-            <textarea class="popup__form-item" name="message" placeholder="messaggio..."></textarea>
-            <a class="popup__form-btn popup-link" href="#popup_2">Invia</a>
+         <form class="popup__form" id="formRequest" action="#" method="post">
+            <input id="formName" class="popup__form-item _req" type="text" name="name" placeholder="nome">
+            <input id="formEmail" class="popup__form-item _req _email" type="email" name="email" placeholder="email">
+            <textarea id="formMessage" class="popup__form-item _req" name="message" placeholder="messaggio..."></textarea>
+            <button type="submit" class="popup__form-btn option-button">
+               <!-- Invia -->
+               <a class="popup-link" href="#popup_2">Invia</a>
+            </button>
          </form>
       </div>
    </div>
 </div>
 
 <div id="popup_2" class="popup">
-   <div class="popup__body">
+   <div class="popup__body popup__body-next">
       <div class="popup__content popup__content-next">
+         <div class="close-popup popup__content-closed"></div>
+         <div class="popup__img">
+            <img src="img/checked.png" alt="checked">
+         </div>
          <div class="popup__text">
-            Sent!
+            Thank you!
          </div>
       </div>
    </div>
 </div>
 	</div>
-	<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js?_v=20221108173136"></script> -->
-<script src="js/app.min.js?_v=20221108173136"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js?_v=20221114211043"></script>
+<script src="js/app.min.js?_v=20221114211043"></script>
 </body>
 
 </html>
